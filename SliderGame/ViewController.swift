@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var targetLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var roundLabel: UILabel!
+    @IBOutlet weak var slider: UISlider!
     
     var sliderValue = 50
     var score = 0 {
@@ -24,6 +25,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let thumbImageNormal = UIImage(named: "ballYellow")
+        slider.setThumbImage(thumbImageNormal, for: .normal)
+        
+        let thumbImagePressed = UIImage(named: "ballGrey")
+        slider.setThumbImage(thumbImagePressed, for: .highlighted)
+        
+        let trackLeftImage = UIImage(named: "slotBaseBad")
+        slider.setMinimumTrackImage(trackLeftImage, for: .normal)
+        
+        let trackRightImage = UIImage(named: "slotBaseGood")
+        slider.setMaximumTrackImage(trackRightImage, for: .normal)
+        
         newRound()
     }
     
