@@ -29,13 +29,15 @@ class ViewController: UIViewController {
     
     @IBAction func showAlertButton(_ sender: UIButton) {
         let diference = abs(targetValue - sliderValue)
-        let currentScore = 100 - diference
+        var currentScore = 100 - diference
         
         let title: String
         if diference == 0 {
             title = "Ідеально!"
+            currentScore += 100
         } else if diference < 5 {
             title = "Майже вдалося!"
+            currentScore += 50
         } else if diference < 10 {
             title = "Непогано!"
         } else {
@@ -44,12 +46,14 @@ class ViewController: UIViewController {
         
         let message = "Ваше значеня: \(sliderValue)\nВи набрали: \(currentScore) балів"
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) {_ in self.newRound()}
+        let action = UIAlertAction(title: "OK", style: .default) {_ in
+            self.score += currentScore
+            self.round += 1
+            self.newRound()
+        }
         alert.addAction(action)
         present(alert, animated: true)
         
-        score += currentScore
-        round += 1
     }
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
