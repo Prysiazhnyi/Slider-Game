@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFAudio
 
 class ViewController: UIViewController {
     
@@ -13,6 +14,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var roundLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
+    
+    var audioPlayerPerfect: AVAudioPlayer? // Для идеального попадания
+    var audioPlayerMiss: AVAudioPlayer? // Для промаха
     
     var sliderValue = 50
     var score = 0 {
@@ -22,7 +26,7 @@ class ViewController: UIViewController {
         didSet { roundLabel.text = "\(round)" }
     }
     var targetValue = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +43,7 @@ class ViewController: UIViewController {
         slider.setMaximumTrackImage(trackRightImage, for: .normal)
         
         newRound()
+        loadSounds()
     }
     
     @IBAction func showAlertButton(_ sender: UIButton) {
@@ -48,14 +53,18 @@ class ViewController: UIViewController {
         let title: String
         if diference == 0 {
             title = "Ідеально!"
+            audioPlayerPerfect?.play()
             currentScore += 100
         } else if diference < 5 {
             title = "Майже вдалося!"
             currentScore += 50
+            audioPlayerPerfect?.play()
         } else if diference < 10 {
             title = "Непогано!"
+            audioPlayerPerfect?.play()
         } else {
             title = "Мимо("
+            audioPlayerMiss?.play()
         }
         
         let message = "Ваше значеня: \(sliderValue)\nВи набрали: \(currentScore) балів"
@@ -69,7 +78,7 @@ class ViewController: UIViewController {
         present(alert, animated: true)
         
     }
-
+    
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         sliderValue = lroundf(sender.value)
     }
@@ -79,12 +88,34 @@ class ViewController: UIViewController {
         round = 1
         newRound()
     }
-
+    
     func newRound() {
         targetValue = Int.random(in: 1...100)
         targetLabel.text = "\(targetValue)"
         scoreLabel.text = "\(score)"
         roundLabel.text = "\(round)"
     }
+    
+    func loadSounds() {
+        // Загрузка звука для идеального попадания
+        if let perfectSoundURL = Bundle.main.url(forResource: "crowd-applause", withExtension: "wav") {
+            do {
+                audioPlayerPerfect = try AVAudioPlayer(contentsOf: perfectSoundURL)
+                audioPlayerPerfect?.prepareToPlay()
+            } catch {
+                print("Ошибка загрузки звука perfectSound: \(error.localizedDescription)")
+            }
+        }
+        
+        // Загрузка звука для промаха
+        if let missSoundURL = Bundle.main.url(forResource: "laugh-high-pitch", withExtension: "wav") {
+            do {
+                audioPlayerMiss = try AVAudioPlayer(contentsOf: missSoundURL)
+                audioPlayerMiss?.prepareToPlay()
+            } catch {
+                print("Ошибка загрузки звука missSound: \(error.localizedDescription)")
+            }
+        }
+    }
+    
 }
-
