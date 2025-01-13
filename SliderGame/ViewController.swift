@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     var audioPlayerPerfect: AVAudioPlayer? // Для идеального попадания
     var audioPlayerMiss: AVAudioPlayer? // Для промаха
+    var audioPlayerMidle: AVAudioPlayer?
     
     var sliderValue = 50
     var score = 0 {
@@ -55,13 +56,13 @@ class ViewController: UIViewController {
             title = "Ідеально!"
             audioPlayerPerfect?.play()
             currentScore += 100
-        } else if diference < 5 {
+        } else if diference < 3 {
             title = "Майже вдалося!"
             currentScore += 50
             audioPlayerPerfect?.play()
-        } else if diference < 10 {
+        } else if diference < 6 {
             title = "Непогано!"
-            audioPlayerPerfect?.play()
+            audioPlayerMidle?.play()
         } else {
             title = "Мимо("
             audioPlayerMiss?.play()
@@ -112,6 +113,15 @@ class ViewController: UIViewController {
             do {
                 audioPlayerMiss = try AVAudioPlayer(contentsOf: missSoundURL)
                 audioPlayerMiss?.prepareToPlay()
+            } catch {
+                print("Ошибка загрузки звука missSound: \(error.localizedDescription)")
+            }
+        }
+        
+        if let midleSoundURL = Bundle.main.url(forResource: "female-laugh", withExtension: "wav") {
+            do {
+                audioPlayerMidle = try AVAudioPlayer(contentsOf: midleSoundURL)
+                audioPlayerMidle?.prepareToPlay()
             } catch {
                 print("Ошибка загрузки звука missSound: \(error.localizedDescription)")
             }
