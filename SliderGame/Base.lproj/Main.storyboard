@@ -23,6 +23,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC8-Sn-Yh2">
                                 <rect key="frame" x="778" y="353" width="50" height="35"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <segue destination="f1R-6j-orW" kind="presentation" modalTransitionStyle="flipHorizontal" id="Qfz-lr-0Ws"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рахунок:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioH-19-0tH">
                                 <rect key="frame" x="256" y="360" width="71" height="21"/>
@@ -158,9 +161,66 @@
             </objects>
             <point key="canvasLocation" x="139.95535714285714" y="2.8985507246376816"/>
         </scene>
+        <!--About View Controller-->
+        <scene sceneID="eEn-7c-eXB">
+            <objects>
+                <viewController id="f1R-6j-orW" customClass="AboutViewController" customModule="SliderGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2dY-kH-mBI">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background 1" highlightedImage="background 1" translatesAutoresizingMaskIntoConstraints="NO" id="VAW-XL-Fon">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QJ-dN-liE">
+                                <rect key="frame" x="418" y="384" width="60" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Закрити"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="f1R-6j-orW" eventType="touchUpInside" id="xkG-8C-Ulv"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cak-3X-LX2">
+                                <rect key="frame" x="40" y="49" width="816" height="284"/>
+                                <string key="text">*** Slider Game ***
+
+Вітаємо в чудовій грі Slider Game!
+
+Ваше завдання розмістити значення слайдеру найближче до загаданого числа!
+
+Чим ближче ви до нього – тим більше балів отримаєте!</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tj2-nI-YhI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tj2-nI-YhI" firstAttribute="trailing" secondItem="cak-3X-LX2" secondAttribute="trailing" constant="40" id="FuZ-Wx-Ttu"/>
+                            <constraint firstItem="VAW-XL-Fon" firstAttribute="top" secondItem="2dY-kH-mBI" secondAttribute="top" id="IkO-fT-tUG"/>
+                            <constraint firstItem="4QJ-dN-liE" firstAttribute="bottom" secondItem="tj2-nI-YhI" secondAttribute="bottom" id="R0a-uj-WSh"/>
+                            <constraint firstItem="4QJ-dN-liE" firstAttribute="centerX" secondItem="tj2-nI-YhI" secondAttribute="centerX" id="RYu-tg-LOu"/>
+                            <constraint firstItem="VAW-XL-Fon" firstAttribute="trailing" secondItem="2dY-kH-mBI" secondAttribute="trailing" id="Yxn-Vr-Wkn"/>
+                            <constraint firstItem="VAW-XL-Fon" firstAttribute="bottom" secondItem="2dY-kH-mBI" secondAttribute="bottom" id="als-vD-ol8"/>
+                            <constraint firstItem="4QJ-dN-liE" firstAttribute="top" secondItem="cak-3X-LX2" secondAttribute="bottom" constant="50" id="o0U-vf-Uu2"/>
+                            <constraint firstItem="cak-3X-LX2" firstAttribute="top" secondItem="tj2-nI-YhI" secondAttribute="top" constant="50" id="p1J-Oq-lly"/>
+                            <constraint firstItem="cak-3X-LX2" firstAttribute="leading" secondItem="tj2-nI-YhI" secondAttribute="leading" constant="40" id="qdm-Bt-45L"/>
+                            <constraint firstItem="VAW-XL-Fon" firstAttribute="leading" secondItem="2dY-kH-mBI" secondAttribute="leading" id="tM1-TN-9e2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JxQ-zU-0ri" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139.95535714285714" y="828.98550724637687"/>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="1024" height="768"/>
+        <image name="background 1" width="1024" height="768"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
